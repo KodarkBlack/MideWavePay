@@ -4,66 +4,479 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
+    <title>Settings | MideWave</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="settings.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ff6b6b;
+            --text-dark: #343a40;
+            --text-light: #f8f9fa;
+            --dark-bg: #121212;
+            --card-bg: #1E1E1E;
+            --border-color: #333;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-dark);
+            padding-top: 60px;
+            padding-bottom: 80px;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+        
+        .navbar {
+            background-color: var(--secondary-color) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .navbar {
+            background-color: var(--card-bg) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+        }
+        
+        body.dark-mode .nav-link {
+            color: var(--text-light) !important;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
+        .dropdown-menu {
+            background-color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .dropdown-menu {
+            background-color: var(--card-bg);
+        }
+        
+        .dropdown-item {
+            color: var(--text-dark);
+        }
+        
+        body.dark-mode .dropdown-item {
+            color: var(--text-light);
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+        }
+        
+        .settings {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        .settings-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .settings-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .settings-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .settings-section {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .settings-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        body.dark-mode .settings-section h2 {
+            border-bottom-color: var(--border-color);
+        }
+        
+        .settings-section label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        body.dark-mode .settings-section label {
+            color: var(--text-light);
+        }
+        
+        .settings-section input, 
+        .settings-section select {
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        body.dark-mode .settings-section input,
+        body.dark-mode .settings-section select {
+            background-color: #333;
+            border-color: var(--border-color);
+            color: var(--text-light);
+        }
+        
+        .settings-section input:focus, 
+        .settings-section select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+        }
+        
+        .settings-section button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .settings-section button:hover {
+            background-color: #3a5ae8;
+        }
+        
+        .saved-details {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border: 1px dashed #ccc;
+        }
+        
+        body.dark-mode .saved-details {
+            background-color: #333;
+            border-color: var(--border-color);
+        }
+        
+        .saved-details p {
+            margin: 5px 0;
+        }
+        
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        body.dark-mode .bottom-navigation {
+            background-color: var(--card-bg);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-item-manage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        body.dark-mode .nav-item-manage {
+            color: var(--text-light);
+        }
+        
+        .nav-item-manage i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .nav-item-manage:hover, 
+        .nav-item-manage.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Security settings */
+        .security-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        body.dark-mode .security-option {
+            border-bottom-color: var(--border-color);
+        }
+        
+        .security-option:last-child {
+            border-bottom: none;
+        }
+        
+        /* Notification settings */
+        .notification-item {
+            margin-bottom: 15px;
+        }
+        
+        /* Language selector */
+        select {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="#">MideWave</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span >
-            <i class='bx bxs-left-down-arrow-circle'></i>
-          </span>
+            <span class="navbar-toggler-icon"></span>
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Payments <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Giftcards</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                Payments
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Cash App</a>
-                <a class="dropdown-item" href="#">Zelle </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Apple Pay</a>
-                <a class="dropdown-item" href="#">Venmo Pay</a>
-              </div>
-            </li>
-          </ul>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Payments <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Giftcards</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Payments
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Cash App</a>
+                        <a class="dropdown-item" href="#">Zelle</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Apple Pay</a>
+                        <a class="dropdown-item" href="#">Venmo Pay</a>
+                    </div>
+                </li>
+            </ul>
         </div>
     </nav>
 
-    <!-- <section class="setting-ads"></section> -->
-
-
     <main class="settings">
         <div class="settings-container">
+            <!-- App Settings Section -->
+            <div class="settings-section">
+                <h2><i class='bx bx-cog'></i> App Settings</h2>
+                
+                <div class="toggle-container">
+                    <span>Dark Mode</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="dark-mode-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <label for="language">Language:</label>
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr">French</option>
+                    <option value="de">German</option>
+                </select>
+                
+                <label for="currency">Default Currency:</label>
+                <select id="currency">
+                    <option value="USD">US Dollar (USD)</option>
+                    <option value="EUR">Euro (EUR)</option>
+                    <option value="GBP">British Pound (GBP)</option>
+                    <option value="NGN">Nigerian Naira (NGN)</option>
+                </select>
+                
+                <button id="save-app-settings">Save App Settings</button>
+            </div>
+            
             <!-- Bank Details Section -->
-            <div class="details-section">
-                <h2>Bank Details Settings</h2>
+            <div class="settings-section">
+                <h2><i class='bx bx-credit-card'></i> Bank Details</h2>
                 <label for="bank-name">Bank Name:</label>
                 <input type="text" id="bank-name" placeholder="Enter your bank name">
+                
                 <label for="account-number">Account Number:</label>
                 <input type="text" id="account-number" placeholder="Enter your account number">
-                <label for="account-name">Account Name</label>
-                <input type="text" name="" id="account-name" placeholder="Enter your account name">
-                <button id="save-button">Save Bank Details</button>
+                
+                <label for="account-name">Account Name:</label>
+                <input type="text" id="account-name" placeholder="Enter your account name">
+                
+                <label for="routing-number">Routing Number (if applicable):</label>
+                <input type="text" id="routing-number" placeholder="Enter routing number">
+                
+                <button id="save-bank-details">Save Bank Details</button>
+                
+                <div class="saved-details" id="saved-bank-details">
+                    <h4>Active Bank Details</h4>
+                    <p id="display-bank-name">Not set</p>
+                    <p id="display-account-number">Not set</p>
+                    <p id="display-account-name">Not set</p>
+                </div>
             </div>
-    
-            <!-- Display Saved Bank Details -->
-            <div class="saved-bank-details">
-              <h3>Active Bank</h3>
-              <div id="saved-bank-details"></div>
+            
+            <!-- Security Settings Section -->
+            <div class="settings-section">
+                <h2><i class='bx bx-shield-quarter'></i> Security</h2>
+                
+                <div class="security-option">
+                    <span>Two-Factor Authentication</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="2fa-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="security-option">
+                    <span>Biometric Login</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="biometric-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="security-option">
+                    <span>Email Notifications</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="email-notifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <button id="change-password">Change Password</button>
+            </div>
+            
+            <!-- Notification Settings Section -->
+            <div class="settings-section">
+                <h2><i class='bx bx-bell'></i> Notifications</h2>
+                
+                <div class="notification-item">
+                    <label for="transaction-alerts">Transaction Alerts:</label>
+                    <select id="transaction-alerts">
+                        <option value="all">All Transactions</option>
+                        <option value="large">Large Transactions Only</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+                
+                <div class="notification-item">
+                    <label for="promo-notifications">Promotional Notifications:</label>
+                    <select id="promo-notifications">
+                        <option value="enabled">Enabled</option>
+                        <option value="disabled">Disabled</option>
+                    </select>
+                </div>
+                
+                <div class="notification-item">
+                    <label for="app-updates">App Updates:</label>
+                    <select id="app-updates">
+                        <option value="auto">Auto Update</option>
+                        <option value="notify">Notify Me</option>
+                        <option value="disabled">Disabled</option>
+                    </select>
+                </div>
+                
+                <button id="save-notification-settings">Save Notification Settings</button>
             </div>
         </div>
     </main>
@@ -72,39 +485,228 @@
         <div class="bottom-navigation">
             <a href="/cashapp.html">
                 <div class="nav-item-manage">
-                    <i class='bx bxs-dollar-circle' ></i>
+                    <i class='bx bxs-dollar-circle'></i>
+                    <span>Cash App</span>
                 </div>
             </a>
     
             <a href="/zelle.html">
                 <div class="nav-item-manage">
                     <i class='bx bx-paper-plane'></i>
+                    <span>Zelle</span>
                 </div>
             </a>
     
             <a href="/manage.html">
                 <div class="nav-item-manage">
                     <i class='bx bxs-home'></i>
+                    <span>Home</span>
                 </div>
             </a>
             <a href="/giftcard.html">
                 <div class="nav-item-manage">
                     <i class='bx bxs-gift'></i>
+                    <span>Giftcards</span>
                 </div>
             </a>
-            <a href="/settings.html">
+            <a href="/settings.html" class="active">
                 <div class="nav-item-manage">
                     <i class='bx bxs-cog'></i>
+                    <span>Settings</span>
                 </div>
             </a>
         </div>
-
     </section>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <script src="func.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+        
+        // Check for saved user preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            darkModeToggle.checked = true;
+        }
+        
+        darkModeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+        
+        // Bank Details Saving
+        document.getElementById('save-bank-details').addEventListener('click', function() {
+            const bankName = document.getElementById('bank-name').value;
+            const accountNumber = document.getElementById('account-number').value;
+            const accountName = document.getElementById('account-name').value;
+            
+            if (!bankName || !accountNumber || !accountName) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Please fill in all bank details',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+            
+            // Save to localStorage (in a real app, you would save to your backend)
+            localStorage.setItem('bankDetails', JSON.stringify({
+                bankName,
+                accountNumber,
+                accountName
+            }));
+            
+            // Update displayed details
+            document.getElementById('display-bank-name').textContent = bankName;
+            document.getElementById('display-account-number').textContent = accountNumber;
+            document.getElementById('display-account-name').textContent = accountName;
+            
+            Swal.fire({
+                title: 'Success!',
+                text: 'Bank details saved successfully',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        });
+        
+        // Load saved bank details
+        function loadBankDetails() {
+            const savedDetails = localStorage.getItem('bankDetails');
+            if (savedDetails) {
+                const details = JSON.parse(savedDetails);
+                document.getElementById('display-bank-name').textContent = details.bankName;
+                document.getElementById('display-account-number').textContent = details.accountNumber;
+                document.getElementById('display-account-name').textContent = details.accountName;
+                
+                // Fill the form fields
+                document.getElementById('bank-name').value = details.bankName;
+                document.getElementById('account-number').value = details.accountNumber;
+                document.getElementById('account-name').value = details.accountName;
+            }
+        }
+        
+        // App Settings Saving
+        document.getElementById('save-app-settings').addEventListener('click', function() {
+            const language = document.getElementById('language').value;
+            const currency = document.getElementById('currency').value;
+            
+            // Save to localStorage
+            localStorage.setItem('appSettings', JSON.stringify({
+                language,
+                currency
+            }));
+            
+            Swal.fire({
+                title: 'Success!',
+                text: 'App settings saved successfully',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        });
+        
+        // Load app settings
+        function loadAppSettings() {
+            const savedSettings = localStorage.getItem('appSettings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                document.getElementById('language').value = settings.language;
+                document.getElementById('currency').value = settings.currency;
+            }
+        }
+        
+        // Notification Settings Saving
+        document.getElementById('save-notification-settings').addEventListener('click', function() {
+            const transactionAlerts = document.getElementById('transaction-alerts').value;
+            const promoNotifications = document.getElementById('promo-notifications').value;
+            const appUpdates = document.getElementById('app-updates').value;
+            
+            // Save to localStorage
+            localStorage.setItem('notificationSettings', JSON.stringify({
+                transactionAlerts,
+                promoNotifications,
+                appUpdates
+            }));
+            
+            Swal.fire({
+                title: 'Success!',
+                text: 'Notification settings saved successfully',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        });
+        
+        // Load notification settings
+        function loadNotificationSettings() {
+            const savedSettings = localStorage.getItem('notificationSettings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                document.getElementById('transaction-alerts').value = settings.transactionAlerts;
+                document.getElementById('promo-notifications').value = settings.promoNotifications;
+                document.getElementById('app-updates').value = settings.appUpdates;
+            }
+        }
+        
+        // Change Password
+        document.getElementById('change-password').addEventListener('click', function() {
+            Swal.fire({
+                title: 'Change Password',
+                html: `
+                    <input type="password" id="current-password" class="swal2-input" placeholder="Current Password">
+                    <input type="password" id="new-password" class="swal2-input" placeholder="New Password">
+                    <input type="password" id="confirm-password" class="swal2-input" placeholder="Confirm New Password">
+                `,
+                confirmButtonText: 'Change Password',
+                focusConfirm: false,
+                preConfirm: () => {
+                    const currentPassword = Swal.getPopup().querySelector('#current-password').value;
+                    const newPassword = Swal.getPopup().querySelector('#new-password').value;
+                    const confirmPassword = Swal.getPopup().querySelector('#confirm-password').value;
+                    
+                    if (!currentPassword || !newPassword || !confirmPassword) {
+                        Swal.showValidationMessage('Please fill in all fields');
+                        return false;
+                    }
+                    
+                    if (newPassword !== confirmPassword) {
+                        Swal.showValidationMessage('New passwords do not match');
+                        return false;
+                    }
+                    
+                    if (newPassword.length < 6) {
+                        Swal.showValidationMessage('Password must be at least 6 characters');
+                        return false;
+                    }
+                    
+                    // In a real app, you would send this to your backend
+                    return { currentPassword, newPassword };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Success!',
+                        'Your password has been changed.',
+                        'success'
+                    );
+                }
+            });
+        });
+        
+        // Load all settings when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            loadBankDetails();
+            loadAppSettings();
+            loadNotificationSettings();
+        });
+    </script>
 </body>
-
 </html>

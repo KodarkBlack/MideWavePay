@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | MideWave</title>
+    <title>Login | MideWave</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -24,7 +24,7 @@
             color: var(--text-dark);
         }
         
-        .register {
+        .login {
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -32,7 +32,7 @@
             padding: 20px;
         }
         
-        .register-form {
+        .login-form {
             background-color: white;
             padding: 40px;
             border-radius: 10px;
@@ -41,7 +41,7 @@
             max-width: 500px;
         }
         
-        .register-form h2 {
+        .login-form h2 {
             color: var(--primary-color);
             margin-bottom: 20px;
             text-align: center;
@@ -84,18 +84,18 @@
             background-color: #3a5ae8;
         }
         
-        .login-link {
+        .register-link {
             text-align: center;
             margin-top: 20px;
         }
         
-        .login-link a {
+        .register-link a {
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
         }
         
-        .login-link a:hover {
+        .register-link a:hover {
             text-decoration: underline;
         }
         
@@ -119,42 +119,6 @@
             border: 1px solid #f5c6cb;
         }
         
-        footer {
-            background-color: #343a40;
-            color: white;
-            padding: 40px 0;
-        }
-        
-        footer a {
-            color: white;
-            text-decoration: none;
-        }
-        
-        footer a:hover {
-            color: #ddd;
-        }
-        
-        footer ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        footer ul li {
-            margin-bottom: 8px;
-        }
-        
-        footer ul b {
-            font-size: 18px;
-            margin-bottom: 15px;
-            display: inline-block;
-        }
-        
-        .subscribe-email {
-            font-size: 12px;
-            color: #aaa;
-            margin-top: 10px;
-        }
-        
         /* Loading spinner */
         #loading-spinner {
             display: none;
@@ -168,91 +132,23 @@
             justify-content: center;
             align-items: center;
         }
-        
-        @media (max-width: 768px) {
-            .register-form {
-                padding: 30px 20px;
-            }
-            
-            footer {
-                text-align: center;
-            }
-            
-            footer ul {
-                margin-bottom: 30px;
-            }
-        }
     </style>
 </head>
 <body>
-   <section class="register">
-    <div class="register-form">
-        <h2>Create Your Account</h2>
+   <section class="login">
+    <div class="login-form">
+        <h2>Welcome Back</h2>
         <p class="alert" id="status-message"></p>
-        <form class="form" onsubmit="registerUser(event)">
-            <input type="text" placeholder="Full Name" id="name" required>
+        <form class="form" onsubmit="loginUser(event)">
             <input type="email" placeholder="Email" id="email" required>
-            <input type="password" placeholder="Password (min 6 characters)" id="password" minlength="6" required>
-            <button type="submit">Create Account</button>
+            <input type="password" placeholder="Password" id="password" required>
+            <button type="submit">Sign In</button>
         </form>
-        <div class="login-link">
-            Already have an account? <a href="login.html">Sign in</a>
+        <div class="register-link">
+            Don't have an account? <a href="register.html">Register here</a>
         </div>
     </div>
    </section>
-
-   <footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 mb-4">
-                <a href="/index.html">
-                    <h1>MideWave</h1>
-                </a>
-            </div>
-            <div class="col-md-3 mb-4">
-                <ul>
-                    <b>Gift Card</b>
-                    <li>Buy Now</li>
-                    <li>Sell Now</li>
-                    <li>Gift Card Balance</li>
-                    <li>Gift Card Marketplace</li>
-                    <li>Gift Card Deals</li>
-                </ul>
-            </div>
-            <div class="col-md-3 mb-4">
-                <ul>
-                    <b>Popular Brand</b>
-                    <li>Apple</li>
-                    <li>Amazon</li>
-                    <li>Walmart</li>
-                    <li>Target</li>
-                    <li>Starbucks</li>
-                </ul>
-            </div>
-            <div class="col-md-3 mb-4">
-                <ul>
-                    <b>Google Play</b>
-                    <li>Netflix</li>
-                    <li>Uber</li>
-                    <li>Disney+</li>
-                    <li>Xbox live</li>
-                    <li>PlayStation Store</li>
-                </ul>
-            </div>
-            <div class="col-12 mt-4">
-                <div class="subscribe-box">
-                    <b>Subscribe</b>
-                    <p>Stay Updated with Our Latest Features and Releases</p>
-                    <form class="d-flex" onsubmit="subscribe(event)">
-                        <input class="form-control" type="email" placeholder="Enter Your Email" required>
-                        <button class="btn btn-primary ml-2" type="submit">Subscribe</button>
-                    </form>
-                    <p class="subscribe-email">By subscribing you agree to our privacy policy and consent to receive updates from our company.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-   </footer>
 
    <!-- Loading spinner -->
    <div id="loading-spinner">
@@ -269,8 +165,7 @@
    <script type="module">
        // Import the functions you need from the SDKs you need
        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-       import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-       import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+       import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
        // Your web app's Firebase configuration
        const firebaseConfig = {
@@ -287,13 +182,11 @@
        // Initialize Firebase
        const app = initializeApp(firebaseConfig);
        const auth = getAuth(app);
-       const database = getDatabase(app);
 
-       // Registration function
-       window.registerUser = async function(event) {
+       // Login function
+       window.loginUser = async function(event) {
            event.preventDefault();
            
-           const name = document.getElementById('name').value;
            const email = document.getElementById('email').value;
            const password = document.getElementById('password').value;
            
@@ -301,29 +194,15 @@
            document.getElementById('loading-spinner').style.display = 'flex';
            
            try {
-               // Create user with email and password
-               const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-               const user = userCredential.user;
-               
-               // Update user profile with display name
-               await updateProfile(user, {
-                   displayName: name
-               });
-               
-               // Save additional user data to Realtime Database
-               await set(ref(database, 'users/' + user.uid), {
-                   name: name,
-                   email: email,
-                   balance: 0,
-                   createdAt: new Date().toISOString()
-               });
+               // Sign in user with email and password
+               await signInWithEmailAndPassword(auth, email, password);
                
                // Show success message
                Swal.fire({
-                   title: 'Registration Successful!',
-                   text: 'Your account has been created successfully',
+                   title: 'Login Successful!',
+                   text: 'You are being redirected to your dashboard',
                    icon: 'success',
-                   confirmButtonText: 'Continue to Dashboard'
+                   confirmButtonText: 'Continue'
                }).then(() => {
                    // Redirect to manage page
                    window.location.href = 'manage.html';
@@ -331,24 +210,27 @@
                
            } catch (error) {
                // Handle errors
-               let errorMessage = 'An error occurred during registration.';
+               let errorMessage = 'An error occurred during login.';
                
                switch(error.code) {
-                   case 'auth/email-already-in-use':
-                       errorMessage = 'This email is already registered.';
+                   case 'auth/user-not-found':
+                       errorMessage = 'No account found with this email.';
+                       break;
+                   case 'auth/wrong-password':
+                       errorMessage = 'Incorrect password. Please try again.';
                        break;
                    case 'auth/invalid-email':
                        errorMessage = 'Please enter a valid email address.';
                        break;
-                   case 'auth/weak-password':
-                       errorMessage = 'Password should be at least 6 characters.';
+                   case 'auth/too-many-requests':
+                       errorMessage = 'Too many failed attempts. Account temporarily locked.';
                        break;
                    default:
                        errorMessage = error.message;
                }
                
                Swal.fire({
-                   title: 'Registration Failed',
+                   title: 'Login Failed',
                    text: errorMessage,
                    icon: 'error',
                    confirmButtonText: 'OK'
@@ -358,21 +240,6 @@
                // Hide loading spinner
                document.getElementById('loading-spinner').style.display = 'none';
            }
-       };
-       
-       // Simple subscribe function (no backend implementation)
-       window.subscribe = function(event) {
-           event.preventDefault();
-           const email = event.target.querySelector('input').value;
-           
-           Swal.fire({
-               title: 'Subscribed!',
-               text: `Thank you for subscribing with ${email}. You'll receive our updates.`,
-               icon: 'success',
-               confirmButtonText: 'OK'
-           });
-           
-           event.target.reset();
        };
    </script>
 </body>

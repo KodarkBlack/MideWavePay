@@ -3,12 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage</title>
+    <title>MideWave - Dashboard</title>
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" as="style">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/sweetalert2@11" as="script">
+    
+    <!-- CSS -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ff6b6b;
+            --text-dark: #343a40;
+            --text-light: #f8f9fa;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--text-dark);
+            padding-top: 60px;
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: white !important;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+        }
+        
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .balance {
+            background: linear-gradient(135deg, var(--primary-color), #6c5ce7);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .balance b {
+            font-size: 1.2rem;
+        }
+        
+        .balance span {
+            font-weight: 700;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 80px;
+        }
+        
+        .services button {
+            background-color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            color: var(--text-dark);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .services button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .nav-item-manage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .nav-item-manage i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        a.active .nav-item-manage {
+            color: var(--primary-color);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .balance {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .services {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .services {
+                grid-template-columns: 1fr;
+            }
+            
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -33,7 +187,7 @@
               </a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">Cash App</a>
-                <a class="dropdown-item" href="#">Zelle </a>
+                <a class="dropdown-item" href="#">Zelle</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Apple Pay</a>
                 <a class="dropdown-item" href="#">Venmo Pay</a>
@@ -43,17 +197,24 @@
         </div>
     </nav>
 
-
     <div class="dashboard">
       <div class="balance">
-          <b>Welcome <span>Mide</span></b>
-          <b>Balance: $<span id="balance">1000</span></b>
+          <b>Welcome <span id="username">User</span></b>
+          <b>Balance: $<span id="balance">0.00</span></b>
       </div>
       <div class="services">
-          <button onclick="buySellGiftCard()">Buy/Sell Gift Card</button>
-          <button onclick="tradeCrypto()">Trade Crypto to Fiat</button>
-          <button onclick="claimTokenizedRewards()">Claim Tokenized Rewards</button>
-          <button onclick="buyDataAirtime()">Buy Data/Airtime</button>
+          <button onclick="buySellGiftCard()">
+              <i class='bx bxs-gift' style="margin-right: 8px;"></i> Buy/Sell Gift Card
+          </button>
+          <button onclick="tradeCrypto()">
+              <i class='bx bxs-coin-stack' style="margin-right: 8px;"></i> Trade Crypto to Fiat
+          </button>
+          <button onclick="claimTokenizedRewards()">
+              <i class='bx bxs-award' style="margin-right: 8px;"></i> Claim Tokenized Rewards
+          </button>
+          <button onclick="buyDataAirtime()">
+              <i class='bx bx-wifi' style="margin-right: 8px;"></i> Buy Data/Airtime
+          </button>
       </div>
     </div>
 
@@ -61,39 +222,218 @@
         <div class="bottom-navigation">
             <a href="/cashapp.html">
                 <div class="nav-item-manage">
-                    <i id="open-modal-btn" class='bx bxs-dollar-circle' ></i>
+                    <i class='bx bxs-dollar-circle'></i>
+                    <span>Cash App</span>
                 </div>
             </a>
     
             <a href="/zelle.html">
                 <div class="nav-item-manage">
                     <i class='bx bx-paper-plane'></i>
+                    <span>Zelle</span>
                 </div>
             </a>
     
-            <a href="/manage.html">
+            <a href="/manage.html" class="active">
                 <div class="nav-item-manage">
                     <i class='bx bxs-home'></i>
+                    <span>Home</span>
                 </div>
             </a>
             <a href="/giftcard.html">
                 <div class="nav-item-manage">
                     <i class='bx bxs-gift'></i>
+                    <span>Giftcards</span>
                 </div>
             </a>
             <a href="/settings.html">
                 <div class="nav-item-manage">
                     <i class='bx bxs-cog'></i>
+                    <span>Settings</span>
                 </div>
             </a>
         </div>
-
     </section>
     
-    
+    <!-- Loading spinner (initially hidden) -->
+    <div id="loading-spinner" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;">
+        <div class="spinner-border text-light" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <script src="/cashapp.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCB6Qi6NkuRPMcU5utI5UDHaKME81wVsCk",
+            authDomain: "midepay-70db6.firebaseapp.com",
+            databaseURL: "https://midepay-70db6-default-rtdb.firebaseio.com",
+            projectId: "midepay-70db6",
+            storageBucket: "midepay-70db6.firebasestorage.app",
+            messagingSenderId: "1084919342118",
+            appId: "1:1084919342118:web:0a724b3966226786e3b2e7",
+            measurementId: "G-8MYZJX70RW"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+        const auth = getAuth(app);
+
+        // Check auth state
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in
+                document.getElementById('username').textContent = user.displayName || 'User';
+                
+                // Load user data
+                const userRef = ref(database, 'users/' + user.uid);
+                onValue(userRef, (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        document.getElementById('balance').textContent = data.balance?.toFixed(2) || '0.00';
+                    }
+                });
+                
+                // Log page view
+                logEvent(analytics, 'page_view', {
+                    page_title: 'Dashboard',
+                    page_location: window.location.href
+                });
+            } else {
+                // User is signed out
+                Swal.fire({
+                    title: 'Session Expired',
+                    text: 'Please login again to continue',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    window.location.href = '/login.html';
+                });
+            }
+        });
+
+        // Make functions available globally
+        window.buySellGiftCard = function() {
+            showLoading();
+            logEvent(analytics, 'select_content', {
+                content_type: 'button',
+                item_id: 'buy_sell_giftcard'
+            });
+            
+            // Simulate API call
+            setTimeout(() => {
+                hideLoading();
+                Swal.fire({
+                    title: 'Gift Card Service',
+                    text: 'You are being redirected to the gift card marketplace',
+                    icon: 'success',
+                    confirmButtonText: 'Continue'
+                }).then(() => {
+                    window.location.href = '/giftcard.html';
+                });
+            }, 1000);
+        };
+
+        window.tradeCrypto = function() {
+            showLoading();
+            logEvent(analytics, 'select_content', {
+                content_type: 'button',
+                item_id: 'trade_crypto'
+            });
+            
+            // Simulate API call
+            setTimeout(() => {
+                hideLoading();
+                Swal.fire({
+                    title: 'Crypto Trading',
+                    text: 'You are being redirected to the crypto exchange',
+                    icon: 'success',
+                    confirmButtonText: 'Continue'
+                }).then(() => {
+                    window.location.href = '/crypto.html';
+                });
+            }, 1000);
+        };
+
+        window.claimTokenizedRewards = function() {
+            showLoading();
+            logEvent(analytics, 'select_content', {
+                content_type: 'button',
+                item_id: 'claim_rewards'
+            });
+            
+            // Simulate API call
+            setTimeout(() => {
+                hideLoading();
+                Swal.fire({
+                    title: 'Tokenized Rewards',
+                    text: 'You are being redirected to the rewards center',
+                    icon: 'success',
+                    confirmButtonText: 'Continue'
+                }).then(() => {
+                    window.location.href = '/rewards.html';
+                });
+            }, 1000);
+        };
+
+        window.buyDataAirtime = function() {
+            showLoading();
+            logEvent(analytics, 'select_content', {
+                content_type: 'button',
+                item_id: 'buy_data_airtime'
+            });
+            
+            // Simulate API call
+            setTimeout(() => {
+                hideLoading();
+                Swal.fire({
+                    title: 'Data & Airtime',
+                    text: 'You are being redirected to the data/airtime purchase page',
+                    icon: 'success',
+                    confirmButtonText: 'Continue'
+                }).then(() => {
+                    window.location.href = '/data.html';
+                });
+            }, 1000);
+        };
+
+        // Helper functions
+        function showLoading() {
+            document.getElementById('loading-spinner').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading-spinner').style.display = 'none';
+        }
+
+        // Error handling
+        window.addEventListener('error', (event) => {
+            logEvent(analytics, 'exception', {
+                description: event.message,
+                fatal: true
+            });
+            
+            Swal.fire({
+                title: 'Error',
+                text: 'An unexpected error occurred. Please try again later.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+    </script>
 </body>
 </html>
-

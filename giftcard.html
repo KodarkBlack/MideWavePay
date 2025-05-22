@@ -3,95 +3,687 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gift Card</title>
+    <title>Gift Cards | MideWave</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="settings.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ff6b6b;
+            --text-dark: #343a40;
+            --text-light: #f8f9fa;
+            --dark-bg: #121212;
+            --card-bg: #1E1E1E;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--text-dark);
+            padding-top: 60px;
+            padding-bottom: 80px;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: white !important;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+        }
+        
+        .dashboard {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        .balance {
+            background: linear-gradient(135deg, var(--primary-color), #6c5ce7);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .balance b {
+            font-size: 1.2rem;
+        }
+        
+        .balance span {
+            font-weight: 700;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .services button {
+            background-color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            color: var(--text-dark);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .services button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .giftcard-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .giftcard-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .giftcard-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .giftcard-type {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .giftcard-type:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .giftcard-type.active {
+            border-color: var(--primary-color);
+            background-color: rgba(74, 107, 255, 0.1);
+        }
+        
+        .giftcard-type img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+        
+        .check-balance-form {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .check-balance-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .check-balance-form input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .check-balance-form input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+        }
+        
+        .check-balance-form button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .check-balance-form button:hover {
+            background-color: #3a5ae8;
+        }
+        
+        .balance-result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .balance-result h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .balance-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .bottom-navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .nav-item-manage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .nav-item-manage i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .nav-item-manage:hover, .nav-item-manage.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Loading spinner */
+        #loading-spinner {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .giftcard-types {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .services {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .giftcard-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .services {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="#">MideWave</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span >
-            <i class='bx bxs-left-down-arrow-circle'></i>
-          </span>
+            <span class="navbar-toggler-icon"></span>
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Payments <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Giftcards</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                Payments
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Cash App</a>
-                <a class="dropdown-item" href="#">Zelle </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Apple Pay</a>
-                <a class="dropdown-item" href="#">Venmo Pay</a>
-              </div>
-            </li>
-          </ul>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Payments <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Giftcards</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Payments Options
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Cash App</a>
+                        <a class="dropdown-item" href="#">Zelle</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Apple Pay</a>
+                        <a class="dropdown-item" href="#">Venmo Pay</a>
+                    </div>
+                </li>
+            </ul>
         </div>
     </nav>
 
-    <section class="setting-ads">
-      <div class="dashboard">
+    <div class="dashboard">
         <div class="balance">
-            <b>Welcome <span>Mide</span></b>
-            <b>Balance: $<span id="balance">1000</span></b>
+            <b>Welcome <span id="username">User</span></b>
+            <b>Balance: $<span id="balance">0.00</span></b>
         </div>
+        
         <div class="services">
-            <button onclick="buySellGiftCard()">Buy/Sell Gift Card</button>
-            <button onclick="tradeCrypto()">Trade Crypto to Fiat</button>
-            <button onclick="claimTokenizedRewards()">Claim Tokenized Rewards</button>
-            <button onclick="buyDataAirtime()">Buy Data/Airtime</button>
+            <button onclick="buySellGiftCard()">
+                <i class='bx bxs-gift' style="margin-right: 8px;"></i> Buy/Sell Gift Card
+            </button>
+            <button onclick="tradeCrypto()">
+                <i class='bx bxs-coin-stack' style="margin-right: 8px;"></i> Trade Crypto
+            </button>
+            <button onclick="claimTokenizedRewards()">
+                <i class='bx bxs-award' style="margin-right: 8px;"></i> Claim Rewards
+            </button>
+            <button onclick="buyDataAirtime()">
+                <i class='bx bx-wifi' style="margin-right: 8px;"></i> Data/Airtime
+            </button>
         </div>
-      </div>
-    </section>
+        
+        <div class="giftcard-section">
+            <h2><i class='bx bxs-gift'></i> Gift Card Balance Check</h2>
+            <p class="text-center">Select a gift card type to check its balance</p>
+            
+            <div class="giftcard-types">
+                <div class="giftcard-type" data-type="amazon" onclick="selectGiftCard('amazon')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1200px-Amazon_logo.svg.png" alt="Amazon">
+                    <h5>Amazon</h5>
+                </div>
+                <div class="giftcard-type" data-type="apple" onclick="selectGiftCard('apple')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1200px-Apple_logo_black.svg.png" alt="Apple">
+                    <h5>Apple</h5>
+                </div>
+                <div class="giftcard-type" data-type="google-play" onclick="selectGiftCard('google-play')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/1200px-Google_Play_Store_badge_EN.svg.png" alt="Google Play">
+                    <h5>Google Play</h5>
+                </div>
+                <div class="giftcard-type" data-type="steam" onclick="selectGiftCard('steam')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/1200px-Steam_icon_logo.svg.png" alt="Steam">
+                    <h5>Steam</h5>
+                </div>
+            </div>
+            
+            <div class="check-balance-form" id="balance-form" style="display: none;">
+                <h4 id="selected-giftcard">Check Amazon Gift Card Balance</h4>
+                <label for="giftcard-number">Gift Card Number:</label>
+                <input type="text" id="giftcard-number" placeholder="Enter gift card number">
+                
+                <label for="giftcard-pin">PIN Code:</label>
+                <input type="text" id="giftcard-pin" placeholder="Enter PIN code (if applicable)">
+                
+                <button id="check-balance-btn" onclick="checkBalance()">Check Balance</button>
+                
+                <div class="balance-result" id="balance-result">
+                    <h4>Gift Card Balance</h4>
+                    <p>Card Type: <span id="result-type">Amazon</span></p>
+                    <p>Card Number: <span id="result-number">************1234</span></p>
+                    <p>Balance: <span class="balance-amount" id="result-balance">$50.00</span></p>
+                    <button class="btn btn-primary mt-3" onclick="tradeGiftCard()">Trade This Gift Card</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section class="manage">
         <div class="bottom-navigation">
             <a href="/cashapp.html">
                 <div class="nav-item-manage">
-                    <i class='bx bxs-dollar-circle' ></i>
+                    <i class='bx bxs-dollar-circle'></i>
+                    <span>Cash App</span>
                 </div>
             </a>
     
             <a href="/zelle.html">
                 <div class="nav-item-manage">
                     <i class='bx bx-paper-plane'></i>
+                    <span>Zelle</span>
                 </div>
             </a>
     
             <a href="/manage.html">
                 <div class="nav-item-manage">
                     <i class='bx bxs-home'></i>
+                    <span>Home</span>
                 </div>
             </a>
-            <a href="/giftcard.html">
+            <a href="/giftcard.html" class="active">
                 <div class="nav-item-manage">
                     <i class='bx bxs-gift'></i>
+                    <span>Giftcards</span>
                 </div>
             </a>
             <a href="/settings.html">
                 <div class="nav-item-manage">
                     <i class='bx bxs-cog'></i>
+                    <span>Settings</span>
                 </div>
             </a>
         </div>
-
     </section>
 
+    <!-- Loading spinner -->
+    <div id="loading-spinner">
+        <div class="spinner-border text-light" role="status" style="width: 3rem; height: 3rem;">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <script src="func.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCB6Qi6NkuRPMcU5utI5UDHaKME81wVsCk",
+            authDomain: "midepay-70db6.firebaseapp.com",
+            databaseURL: "https://midepay-70db6-default-rtdb.firebaseio.com",
+            projectId: "midepay-70db6",
+            storageBucket: "midepay-70db6.firebasestorage.app",
+            messagingSenderId: "1084919342118",
+            appId: "1:1084919342118:web:0a724b3966226786e3b2e7",
+            measurementId: "G-8MYZJX70RW"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const auth = getAuth(app);
+
+        // Global variables
+        let currentUser = null;
+        let selectedGiftCard = null;
+        let currentBalance = 0;
+        const loadingSpinner = document.getElementById('loading-spinner');
+
+        // On auth state changed
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                document.getElementById('username').textContent = user.displayName || 'User';
+                loadUserBalance();
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Load user balance
+        function loadUserBalance() {
+            const userRef = ref(database, 'users/' + currentUser.uid);
+            onValue(userRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data && data.balance) {
+                    currentBalance = data.balance;
+                    document.getElementById('balance').textContent = data.balance.toFixed(2);
+                }
+            });
+        }
+
+        // Select gift card type
+        window.selectGiftCard = function(type) {
+            selectedGiftCard = type;
+            
+            // Update UI
+            document.querySelectorAll('.giftcard-type').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.querySelector(`.giftcard-type[data-type="${type}"]`).classList.add('active');
+            
+            // Show balance form
+            document.getElementById('balance-form').style.display = 'block';
+            document.getElementById('selected-giftcard').textContent = `Check ${getCardName(type)} Gift Card Balance`;
+            
+            // Reset form
+            document.getElementById('giftcard-number').value = '';
+            document.getElementById('giftcard-pin').value = '';
+            document.getElementById('balance-result').style.display = 'none';
+        };
+
+        // Get display name for gift card type
+        function getCardName(type) {
+            const names = {
+                'amazon': 'Amazon',
+                'apple': 'Apple',
+                'google-play': 'Google Play',
+                'steam': 'Steam'
+            };
+            return names[type] || type;
+        }
+
+        // Check gift card balance
+        window.checkBalance = function() {
+            const cardNumber = document.getElementById('giftcard-number').value;
+            const pinCode = document.getElementById('giftcard-pin').value;
+            
+            if (!cardNumber) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Please enter gift card number',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+            
+            // Show loading
+            loadingSpinner.style.display = 'flex';
+            document.getElementById('check-balance-btn').disabled = true;
+            
+            // Simulate API call (in a real app, you would call your backend)
+            setTimeout(() => {
+                // This is a simulation - in a real app you would get this from your API
+                const balance = simulateBalanceCheck(selectedGiftCard, cardNumber, pinCode);
+                
+                // Update UI with results
+                document.getElementById('result-type').textContent = getCardName(selectedGiftCard);
+                document.getElementById('result-number').textContent = '****' + cardNumber.slice(-4);
+                document.getElementById('result-balance').textContent = `$${balance.toFixed(2)}`;
+                document.getElementById('balance-result').style.display = 'block';
+                
+                // Hide loading
+                loadingSpinner.style.display = 'none';
+                document.getElementById('check-balance-btn').disabled = false;
+                
+            }, 2000);
+        };
+
+        // Simulate balance check (replace with real API call)
+        function simulateBalanceCheck(type, number, pin) {
+            // This generates a random balance for demonstration
+            // In a real app, you would call the gift card provider's API
+            const baseAmounts = {
+                'amazon': 100,
+                'apple': 50,
+                'google-play': 25,
+                'steam': 20
+            };
+            
+            // Generate a "random" balance based on card number
+            let hash = 0;
+            for (let i = 0; i < number.length; i++) {
+                hash = (hash << 5) - hash + number.charCodeAt(i);
+                hash |= 0; // Convert to 32bit integer
+            }
+            
+            const base = baseAmounts[type] || 50;
+            const balance = (base + (Math.abs(hash) % base)) / 2;
+            
+            return balance;
+        }
+
+        // Trade gift card
+        window.tradeGiftCard = function() {
+            const cardNumber = document.getElementById('giftcard-number').value;
+            const balanceText = document.getElementById('result-balance').textContent;
+            const balance = parseFloat(balanceText.replace('$', ''));
+            
+            Swal.fire({
+                title: 'Trade Gift Card',
+                html: `
+                    <p>You are about to trade your ${getCardName(selectedGiftCard)} gift card with balance ${balanceText}.</p>
+                    <p>Current rate: $1 = <span id="trade-rate">0.85</span> USD</p>
+                    <p>You will receive: $<span id="trade-amount">${(balance * 0.85).toFixed(2)}</span></p>
+                    <label for="trade-email">Payment Email:</label>
+                    <input type="email" id="trade-email" class="swal2-input" placeholder="Enter payment email" value="${currentUser.email}">
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Confirm Trade',
+                preConfirm: () => {
+                    const email = Swal.getPopup().querySelector('#trade-email').value;
+                    if (!email) {
+                        Swal.showValidationMessage('Please enter payment email');
+                        return false;
+                    }
+                    return { email };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Process the trade
+                    processTrade(selectedGiftCard, cardNumber, balance, result.value.email);
+                }
+            });
+        };
+
+        // Process gift card trade
+        function processTrade(type, number, amount, email) {
+            loadingSpinner.style.display = 'flex';
+            
+            // Simulate API call (in a real app, you would call your backend)
+            setTimeout(() => {
+                // Calculate amount to credit (using current rate)
+                const creditAmount = amount * 0.85; // Using fixed rate for demo
+                
+                // Update user balance in Firebase
+                const userRef = ref(database, 'users/' + currentUser.uid);
+                update(userRef, {
+                    balance: currentBalance + creditAmount
+                }).then(() => {
+                    // Record the transaction
+                    const transactionsRef = ref(database, 'transactions/' + currentUser.uid);
+                    const newTransactionRef = push(transactionsRef);
+                    set(newTransactionRef, {
+                        type: 'giftcard-trade',
+                        giftcardType: type,
+                        giftcardNumber: '****' + number.slice(-4),
+                        amount: amount,
+                        creditAmount: creditAmount,
+                        email: email,
+                        status: 'completed',
+                        timestamp: Date.now()
+                    }).then(() => {
+                        loadingSpinner.style.display = 'none';
+                        Swal.fire({
+                            title: 'Success!',
+                            text: `Your gift card has been traded successfully. $${creditAmount.toFixed(2)} has been credited to your account.`,
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                    });
+                }).catch(error => {
+                    loadingSpinner.style.display = 'none';
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Failed to process trade. Please try again.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                    console.error('Error processing trade:', error);
+                });
+            }, 1500);
+        }
+
+        // Service functions
+        function buySellGiftCard() {
+            window.location.href = 'giftcard.html';
+        }
+
+        function tradeCrypto() {
+            Swal.fire({
+                title: 'Crypto Trading',
+                text: 'Redirecting to crypto exchange...',
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
+        }
+
+        function claimTokenizedRewards() {
+            Swal.fire({
+                title: 'Tokenized Rewards',
+                text: 'Redirecting to rewards section...',
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
+        }
+
+        function buyDataAirtime() {
+            Swal.fire({
+                title: 'Data & Airtime',
+                text: 'Redirecting to data/airtime purchase...',
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
+        }
+    </script>
 </body>
 </html>
