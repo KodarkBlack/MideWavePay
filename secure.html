@@ -3,19 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure</title>
+    <title>Secure Transactions | MideWave</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="Style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #1f2937;
+            --light-color: #f9fafb;
+            --dark-color: #111827;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .cashapp {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-text {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .feature-text img {
+            width: 55%;
+            max-width: 500px;
+            height: auto;
+            margin-bottom: 2rem;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+        }
+        
+        .feature-text h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            line-height: 1.2;
+        }
+        
+        .feature-text p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 2.5rem;
+            color: #4b5563;
+        }
+        
+        .cashapp-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 2rem !important;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .cashapp-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .cashapp-btn .icon {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 4rem 2rem !important;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        footer h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 1rem 2rem;
+            min-width: 180px;
+        }
+        
+        footer ul b {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        footer ul li {
+            margin-bottom: 0.75rem;
+            color: #d1d5db;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        footer ul li:hover {
+            color: white;
+        }
+        
+        footer div {
+            max-width: 300px;
+        }
+        
+        footer div b {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        footer div p {
+            color: #d1d5db;
+            margin-bottom: 1.5rem;
+        }
+        
+        footer input[type="email"] {
+            background-color: #374151;
+            border: none;
+            border-radius: 6px;
+            padding: 0.75rem 1rem !important;
+            color: white;
+            flex-grow: 1;
+        }
+        
+        footer input[type="submit"] {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.75rem 1.5rem !important;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        footer input[type="submit"]:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .subscribe-email {
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            color: #9ca3af !important;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .shield-animation {
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .feature-text h3 {
+                font-size: 2rem;
+            }
+            
+            footer {
+                flex-direction: column;
+            }
+            
+            footer > * {
+                margin-bottom: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .cashapp {
+                padding: 3rem 0;
+            }
+            
+            .feature-text h3 {
+                font-size: 1.8rem;
+            }
+            
+            .feature-text p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
     <section class="cashapp">
         <div class="feature-text">
-            <img src="/PNG/Percentage.png" alt="">
-            <h3>Protecting Your Privacy:</h3>
-            <p>At MideWave we understand the importance of privacy and security, that is why we offer anonymous transaction allowing you to receive and make payments without revealing your personal information with our platform you can enjoy peace of mind kmowing that your financial transaction is secure and private .</p>
+            <img src="/assets/undraw_mobile-encryption_flk2.svg" alt="Secure mobile encryption" class="shield-animation">
+            <h3 class="animate__animated animate__fadeInUp">Protecting Your Privacy</h3>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">At MideWave we understand the importance of privacy and security. That's why we offer anonymous transactions, allowing you to receive and make payments without revealing your personal information. With our platform, you can enjoy peace of mind knowing that your financial transactions are secure and private.</p>
             <a href="/fiat.html">
-                <button class="p-2 cashapp-btn">
+                <button class="p-2 cashapp-btn animate__animated animate__fadeInUp animate__delay-2s">
                   <span class="icon">
                     <i class='bx bxs-check-circle'></i>
                   </span>
@@ -27,10 +246,10 @@
 
     <footer class="d-flex p-5 footer">
       <a href="/index.html">
-        <h1>MideWave</h1>
+        <h1 class="animate__animated animate__fadeIn">MideWave</h1>
       </a>
   
-        <ul>
+        <ul class="animate__animated animate__fadeIn animate__delay-1s">
           <b>Gift Card</b>
           <li>Buy Now</li>
           <li>Sell Now</li>
@@ -39,7 +258,7 @@
           <li>Gift Card Deals</li>
         </ul>
   
-        <ul>
+        <ul class="animate__animated animate__fadeIn animate__delay-2s">
           <b>Popular Brand</b>
           <li>Apple</li>
           <li>Amazon</li>
@@ -48,7 +267,7 @@
           <li>Starbucks</li>
         </ul>
   
-        <ul>
+        <ul class="animate__animated animate__fadeIn animate__delay-3s">
           <b>Google Play</b>
           <li>Netflix</li>
           <li>Uber</li>
@@ -57,20 +276,39 @@
           <li>PlayStation Store</li>
         </ul>
   
-        <div>
+        <div class="animate__animated animate__fadeIn animate__delay-4s">
           <b>Subscribe</b>
-          <p>Stay Updated with Our Lastest Features and Releases</p>
+          <p>Stay Updated with Our Latest Features and Releases</p>
           <form class="d-flex" action="" method="get">
-            <input class="p-2" type="email" name="Enter Your Email" id="">
+            <input class="p-2" type="email" name="email" placeholder="Enter Your Email" required>
             <input class="p-2 ml-3" type="submit" value="Subscribe">
           </form>
-          <p class="subscribe-email">By subscribing you agree to our privacy policy and consent to receive update from our company.</p>
+          <p class="subscribe-email">By subscribing you agree to our privacy policy and consent to receive updates from our company.</p>
         </div>
     </footer>
 
-
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    
+    <script>
+        // Animation trigger on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const animation = entry.target.getAttribute('data-animation');
+                        if (animation) {
+                            entry.target.classList.add('animate__animated', animation);
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('[data-animation]').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>

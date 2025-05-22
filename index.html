@@ -20,6 +20,7 @@
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
+            background-color: #f9fafc;
         }
         
         /* Hero Section */
@@ -33,20 +34,21 @@
         
         .hero-content {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            text-align: center;
+            justify-content: space-between;
         }
         
         .hero-text {
-            max-width: 800px;
-            margin-bottom: 2rem;
+            max-width: 50%;
+            margin-right: 2rem;
         }
         
         .hero-text h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
+            line-height: 1.3;
         }
         
         .hero-text p {
@@ -72,27 +74,121 @@
         }
         
         .hero-image {
-            max-width: 100%;
+            max-width: 45%;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            margin-top: 2rem;
+        }
+        
+        /* Theme Section */
+        .theme-section {
+            padding: 4rem 0;
+            background-color: white;
+        }
+        
+        .theme-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .theme-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .theme-header h2 {
+            font-size: 2.2rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+        
+        .theme-header p {
+            color: var(--secondary-color);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .theme-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .theme-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .theme-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .theme-card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .theme-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .theme-card:hover .theme-card-img img {
+            transform: scale(1.05);
+        }
+        
+        .theme-card-content {
+            padding: 1.5rem;
+        }
+        
+        .theme-card-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark-color);
+        }
+        
+        .theme-card-content p {
+            color: var(--secondary-color);
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+        
+        .theme-card-link {
+            display: inline-block;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .theme-card-link:hover {
+            color: #3a56e8;
         }
         
         /* Features Section */
         .features-section {
             padding: 5rem 0;
+            background-color: #f9fafc;
         }
         
         .feature-card {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             margin-bottom: 3rem;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             background: white;
+            height: auto;
         }
         
         .feature-card:hover {
@@ -101,7 +197,8 @@
         }
         
         .feature-img {
-            height: 250px;
+            flex: 1;
+            min-height: 300px;
             overflow: hidden;
         }
         
@@ -117,7 +214,11 @@
         }
         
         .feature-content {
-            padding: 2rem;
+            flex: 1;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .feature-content i {
@@ -127,19 +228,21 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
         }
         
         .feature-content h3 {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             color: var(--dark-color);
+            line-height: 1.3;
         }
         
         .feature-content p {
             color: var(--secondary-color);
             margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
         
         .feature-stats {
@@ -154,20 +257,20 @@
         }
         
         .stat-item h3 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
         
         .stat-item p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             margin-bottom: 0;
         }
         
         /* Tokenized Rewards */
         .tokenized-rewards {
             background-color: #f8f9fa;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 10px;
             margin-top: 1.5rem;
         }
@@ -180,27 +283,39 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
         
+        .reward-item:last-child {
+            margin-bottom: 0;
+        }
+        
         .reward-item strong {
             color: var(--primary-color);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.5rem;
         }
         
         /* Footer */
         .footer {
             background-color: var(--dark-color);
             color: white;
-            padding: 4rem 0 2rem;
+            padding: 4rem 0 0;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
         
         .footer-logo {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             color: white;
         }
         
         .footer-links h5 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 1.5rem;
             color: white;
         }
@@ -218,6 +333,7 @@
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: color 0.3s ease;
+            font-size: 1rem;
         }
         
         .footer-links a:hover {
@@ -231,6 +347,7 @@
         .newsletter p {
             color: rgba(255, 255, 255, 0.7);
             margin-bottom: 1rem;
+            font-size: 1rem;
         }
         
         .newsletter-form {
@@ -243,6 +360,7 @@
             padding: 0.8rem;
             border: none;
             border-radius: 4px 0 0 4px;
+            font-size: 1rem;
         }
         
         .newsletter-form input[type="submit"] {
@@ -253,6 +371,7 @@
             border-radius: 0 4px 4px 0;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            font-size: 1rem;
         }
         
         .newsletter-form input[type="submit"]:hover {
@@ -260,7 +379,7 @@
         }
         
         .subscribe-email {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.5);
         }
         
@@ -270,8 +389,19 @@
             margin-top: 3rem;
         }
         
+        .footer-bottom-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
         .footer-bottom ul {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             list-style: none;
             padding-left: 0;
@@ -286,6 +416,7 @@
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: color 0.3s ease;
+            font-size: 0.95rem;
         }
         
         .footer-bottom a:hover {
@@ -295,7 +426,6 @@
         .social-icons {
             display: flex;
             justify-content: center;
-            margin-top: 1rem;
         }
         
         .social-icons a {
@@ -316,61 +446,95 @@
             transform: translateY(-3px);
         }
         
+        /* Feature Card Reverse */
+        .feature-reverse {
+            flex-direction: row-reverse;
+        }
+        
+        /* Convenient Marketplace Section */
+        .marketplace-section {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .marketplace-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .marketplace-section p.lead {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
         /* Responsive Adjustments */
-        @media (min-width: 768px) {
-            .hero-content {
-                flex-direction: row;
-                text-align: left;
-                align-items: center;
+        @media (max-width: 991px) {
+            .hero-text {
+                max-width: 100%;
+                margin-right: 0;
+                margin-bottom: 2rem;
             }
             
-            .hero-text {
-                flex: 1;
-                margin-right: 3rem;
-                margin-bottom: 0;
+            .hero-image {
+                display: none;
             }
             
             .feature-card {
-                flex-direction: row;
-                height: 300px;
-            }
-            
-            .feature-img {
-                flex: 1;
+                flex-direction: column;
                 height: auto;
             }
             
-            .feature-content {
-                flex: 1;
-                display: flex;
+            .feature-img {
+                min-height: 250px;
+            }
+            
+            .feature-reverse {
                 flex-direction: column;
-                justify-content: center;
-            }
-            
-            .feature-reverse .feature-img {
-                order: 2;
-            }
-            
-            .feature-reverse .feature-content {
-                order: 1;
             }
         }
         
         @media (max-width: 767px) {
             .hero-text h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .hero-text p {
                 font-size: 1rem;
             }
             
-            .feature-content h3 {
-                font-size: 1.3rem;
+            .theme-header h2 {
+                font-size: 1.8rem;
             }
             
-            .footer-links {
+            .footer-row {
+                flex-direction: column;
+            }
+            
+            .footer-col {
                 margin-bottom: 2rem;
+            }
+            
+            .footer-bottom-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-bottom ul {
+                margin-bottom: 1rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input[type="email"] {
+                border-radius: 4px;
+                margin-bottom: 0.5rem;
+            }
+            
+            .newsletter-form input[type="submit"] {
+                border-radius: 4px;
+                padding: 0.8rem;
             }
         }
         
@@ -420,8 +584,53 @@
         </div>
     </section>
 
+    <!-- Theme Section -->
+    <section class="theme-section">
+        <div class="theme-container">
+            <div class="theme-header animate">
+                <h2>Our Core Themes</h2>
+                <p>Discover the key features that make MideWave the preferred choice for global payments and gift card transactions</p>
+            </div>
+            
+            <div class="theme-cards">
+                <div class="theme-card animate delay-1">
+                    <div class="theme-card-img">
+                        <img src="/assets/undraw_private-data_7v0o.svg" alt="Privacy protection">
+                    </div>
+                    <div class="theme-card-content">
+                        <h3>Privacy Protection</h3>
+                        <p>Anonymous transactions that keep your personal information secure while you conduct financial operations.</p>
+                        <a href="#" class="theme-card-link">Learn more →</a>
+                    </div>
+                </div>
+                
+                <div class="theme-card animate delay-2">
+                    <div class="theme-card-img">
+                        <img src="/assets/undraw_global-team_8jok.svg" alt="Global remittance">
+                    </div>
+                    <div class="theme-card-content">
+                        <h3>Global Remittance</h3>
+                        <p>Send money worldwide at competitive rates with our cost-effective international transfer solutions.</p>
+                        <a href="#" class="theme-card-link">Learn more →</a>
+                    </div>
+                </div>
+                
+                <div class="theme-card animate delay-3">
+                    <div class="theme-card-img">
+                        <img src="/assets/undraw_treasure_k1xi.svg" alt="Token rewards">
+                    </div>
+                    <div class="theme-card-content">
+                        <h3>Tokenized Rewards</h3>
+                        <p>Earn USDT-backed tokens with every transaction and redeem them for exciting benefits.</p>
+                        <a href="#" class="theme-card-link">Learn more →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Convenient Marketplace -->
-    <section class="container my-5 py-5 text-center animate delay-1">
+    <section class="marketplace-section container animate delay-1">
         <div class="bg-light p-5 rounded-lg">
             <h2 class="mb-4">Convenient GiftCard Marketplace</h2>
             <p class="lead mb-4"><strong>Buy and sell directly on our platform with ease</strong></p>
@@ -534,12 +743,12 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 mb-4">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col">
                     <div class="footer-logo">MideWave</div>
                 </div>
-                <div class="col-md-3 mb-4">
+                <div class="footer-col">
                     <div class="footer-links">
                         <h5>Gift Card</h5>
                         <ul>
@@ -551,7 +760,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3 mb-4">
+                <div class="footer-col">
                     <div class="footer-links">
                         <h5>Popular Brands</h5>
                         <ul>
@@ -563,7 +772,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3 mb-4">
+                <div class="footer-col">
                     <div class="footer-links">
                         <h5>Digital Cards</h5>
                         <ul>
@@ -592,7 +801,7 @@
         </div>
         
         <div class="footer-bottom">
-            <div class="container">
+            <div class="footer-bottom-container">
                 <ul>
                     <li>&copy; 2023 MideWave. All rights reserved.</li>
                     <li><a href="#">Privacy Policy</a></li>
@@ -620,7 +829,7 @@
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerHTML = Math.floor(progress * (end - start) + start;
+                obj.innerHTML = Math.floor(progress * (end - start) + start) + '+';
                 if (progress < 1) {
                     window.requestAnimationFrame(step);
                 }
@@ -645,6 +854,11 @@
         
         // Observe elements that should animate
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Initialize all animate elements
+        document.querySelectorAll('.animate, .delay-1, .delay-2, .delay-3').forEach(el => {
             observer.observe(el);
         });
     </script>
