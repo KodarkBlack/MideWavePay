@@ -3,224 +3,650 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="Style.css">
+    <title>MideWave - Global Payments & Gift Cards</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #6c757d;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
+            --accent-color: #ff6b6b;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #5a67d8 0%, #4a6bff 100%);
+            color: white;
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .hero-text {
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn-primary {
+            background-color: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            margin-top: 2rem;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 5rem 0;
+        }
+        
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 3rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .feature-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .feature-card:hover .feature-img img {
+            transform: scale(1.05);
+        }
+        
+        .feature-content {
+            padding: 2rem;
+        }
+        
+        .feature-content i {
+            color: var(--primary-color);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .feature-content p {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 0 1rem;
+        }
+        
+        .stat-item h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-item p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        
+        /* Tokenized Rewards */
+        .tokenized-rewards {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+        }
+        
+        .reward-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .reward-item strong {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .footer-links h5 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .newsletter {
+            margin-top: 1.5rem;
+        }
+        
+        .newsletter p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .newsletter-form input[type="submit"] {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .newsletter-form input[type="submit"]:hover {
+            background-color: #3a56e8;
+        }
+        
+        .subscribe-email {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .footer-bottom {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-bottom ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        
+        .footer-bottom li {
+            margin: 0 1rem;
+        }
+        
+        .footer-bottom a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-bottom a:hover {
+            color: white;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 768px) {
+            .hero-content {
+                flex-direction: row;
+                text-align: left;
+                align-items: center;
+            }
+            
+            .hero-text {
+                flex: 1;
+                margin-right: 3rem;
+                margin-bottom: 0;
+            }
+            
+            .feature-card {
+                flex-direction: row;
+                height: 300px;
+            }
+            
+            .feature-img {
+                flex: 1;
+                height: auto;
+            }
+            
+            .feature-content {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .feature-reverse .feature-img {
+                order: 2;
+            }
+            
+            .feature-reverse .feature-content {
+                order: 1;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-text p {
+                font-size: 1rem;
+            }
+            
+            .feature-content h3 {
+                font-size: 1.3rem;
+            }
+            
+            .footer-links {
+                margin-bottom: 2rem;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
 </head>
 <body>
-  <style>
-    body {
-      background: rgb(137, 137, 222);
-    }
-  </style>
-
-    <!-- Instant access -->
-    <main class="Hero-section">
-        <div class="hero-text">
-            <h1>Instant Access to Global Payments Methods</h1>
-            <p>Experience Seamless and Rewarding financial transactions with MideWave, Access Multiple payments methods globally, prioritize user privacy and enjoy competitive rate for international transfers</p>
-            <div>
-                <a href="/fast.html">
-                  <button class="cashapp-btn">Get Started</button>
-                </a>
-            </div>
-        </div>
-
-        <div class="hero-carousel">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="/PNG/Scene 2.png" class="d-block w-100" alt="...">
-                  </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text animate">
+                    <h1>Instant Access to Global Payment Methods</h1>
+                    <p>Experience seamless and rewarding financial transactions with MideWave. Access multiple payment methods globally, prioritize user privacy, and enjoy competitive rates for international transfers.</p>
+                    <a href="/fast.html" class="btn btn-primary">Get Started</a>
+                </div>
+                <div class="hero-image-container animate delay-1">
+                    <img src="/assets/undraw_transfer-money_h9s3.svg" alt="Global payments illustration" class="hero-image">
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="Convenient">
-                <h3>Convenient GiftCard market place </h3>
-                <p><strong>Buy and Sell directly on the website</strong></p>
-                <p><strong>Choose from a wide variety of Giftcards available.</strong></p>
+    <!-- Convenient Marketplace -->
+    <section class="container my-5 py-5 text-center animate delay-1">
+        <div class="bg-light p-5 rounded-lg">
+            <h2 class="mb-4">Convenient GiftCard Marketplace</h2>
+            <p class="lead mb-4"><strong>Buy and sell directly on our platform with ease</strong></p>
+            <p><strong>Choose from a wide variety of gift cards available at competitive rates</strong></p>
+        </div>
+    </section>
+
+    <!-- Features Sections -->
+    <section class="features-section">
+        <div class="container">
+            <!-- Protecting Privacy -->
+            <div class="feature-card mb-5 animate">
+                <div class="feature-img">
+                    <img src="/assets/undraw_private-data_7v0o.svg" alt="Privacy protection">
+                </div>
+                <div class="feature-content">
+                    <i>Secure</i>
+                    <h3>Protecting Your Privacy</h3>
+                    <p>At MideWave we understand the importance of privacy and security. We offer anonymous transactions allowing you to receive and make payments without revealing your personal information. With our platform you can enjoy peace of mind knowing that your financial transactions are secure and private.</p>
+                    
+                    <div class="feature-stats">
+                        <div class="stat-item">
+                            <h3 id="secure-value">10,000+</h3>
+                            <p>Secure Payments</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 id="experience-value">5,000+</h3>
+                            <p>Satisfied Users</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Global Remittance -->
+            <div class="feature-card mb-5 feature-reverse animate delay-1">
+                <div class="feature-img">
+                    <img src="/assets/undraw_global-team_8jok.svg" alt="Global remittance">
+                </div>
+                <div class="feature-content">
+                    <h3>Global Remittance Made Affordable</h3>
+                    <p>Send money worldwide at competitive rates with MideWave. We make international money transfers cost-effective and convenient for all users.</p>
+                </div>
+            </div>
+            
+            <!-- Discover Gift Cards -->
+            <div class="feature-card mb-5 animate delay-1">
+                <div class="feature-img">
+                    <img src="/assets/undraw_credit-card_t6qm.svg" alt="Gift cards">
+                </div>
+                <div class="feature-content">
+                    <i>Discover</i>
+                    <h3>Discover a World of Gift Cards</h3>
+                    <p>Unlock a wide range of gift cards from us either to trade for fiat or purchase for your personal use.</p>
+                </div>
+            </div>
+            
+            <!-- Tokenized Rewards -->
+            <div class="feature-card mb-5 feature-reverse animate delay-2">
+                <div class="feature-img">
+                    <img src="/assets/undraw_treasure_k1xi.svg" alt="Token rewards">
+                </div>
+                <div class="feature-content">
+                    <i>Rewarding</i>
+                    <h3>Earn Tokens For Transactions</h3>
+                    <p>Introducing our tokenized rewards system where users earn USDT-backed tokens for every successful transaction.</p>
+                    
+                    <div class="tokenized-rewards">
+                        <div class="reward-item">
+                            <strong>Earn</strong>
+                            <p>Earn tokens for every transaction and enjoy discounts, gift cards and more</p>
+                        </div>
+                        <div class="reward-item">
+                            <strong>Redeem</strong>
+                            <p>Redeem your tokens for exciting benefits like discounts, giftcards and exclusive perks</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reliability -->
+            <div class="feature-card mb-5 animate delay-2">
+                <div class="feature-img">
+                    <img src="/assets/undraw_transfer-money_h9s3.svg" alt="Reliable transfers">
+                </div>
+                <div class="feature-content">
+                    <i>Reliable</i>
+                    <h3>Secure Local Transfers</h3>
+                    <p>At MideWave we prioritize your security and safety. Our secure local transfers reduce the risks associated with international transactions, providing you with a reliable and safe financial experience.</p>
+                    <ul>
+                        <li>Fast and Secure Local Transfers</li>
+                        <li>Reduced Risk Compared to International Transfers</li>
+                        <li>Reliable and Safe Financial Experience</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- QR Code Payments -->
+            <div class="feature-card feature-reverse animate delay-3">
+                <div class="feature-img">
+                    <img src="/assets/undraw_in-no-time_ax6n.svg" alt="QR code payments">
+                </div>
+                <div class="feature-content">
+                    <i>Effortless</i>
+                    <h3>Seamless QR Code Payments</h3>
+                    <p>Experience the convenience of dynamic QR code payments for fast and secure transactions. Simply scan the code and complete your payment instantly.</p>
+                </div>
             </div>
         </div>
-    </main>
-
-
-    <!-- Protecting Privacy-->
-
-    <section class="d-flex p-5 feature">
-      <div class="feature-img">
-        <img src="/PNG/Percentage.png" alt="">
-      </div>
-
-      <div class="feature-text">
-        <b>Secure</b>
-        <h3>Protecting Your Privacy:</h3>
-        <p>At MideWave we understand the importance of privacy and security, that is why we offer anonymous transaction aloowing you to recieve and make payments without revealing your personal information with our platform you can enjoy peace of mind kmowing that your financial transaction is secure and private .</p>
-
-        <div>
-          <div>
-            <h3 id="secure-value"></h3>
-            <p>Secure Payments for your peace of mind</p>
-          </div>
-
-          <div>
-            <h3 id="experience-value"></h3>
-            <p>Experience Convenience and security MideWave</p>
-          </div>
-        </div>
-      </div>
     </section>
-
-
-    <!-- Global Remittance -->
-
-    <section class="d-flex p-5 feature">
-      <div class="feature-text">
-        <h3>Global Remittance Made Affordable: Send Money Worldwide At Competitive Rates </h3>
-        <p>With MideWave you can transfer money internationally at competitive rates, making it cost effective and Convenient for user to send money globally.</p>
-      </div>
-
-      <div class="feature-img">
-        <img src="/PNG/EDC 2.png" alt="">
-      </div>
-    </section>
-
-    <!-- Discover -->
-
-    <section class="d-flex p-5 feature">
-      <div class="feature-text">
-        <i>Discover</i>
-        <h3>Discover a World of Gift Cards </h3>
-        <p>Unlock a wide range of Giftcards from us Either to Trade for Fiat or Purchase .</p>
-      </div>
-
-      <div class="feature-img">
-        <img src="/PNG/Present 1.png" alt="">
-      </div>
-    </section>
-
-    <!-- Tokenized -->
-
-    <section class="d-flex p-5 feature">
-      <div class="feature-text">
-        <i>Rewarding</i>
-        <h3>Earn Tokens For Transaction, Redeem For Benefits </h3>
-        <p>Introducing tokenized rewards system where user earn USDT backed token for every successful transaction.</p>
-
-        <div class="d-flex p-2 m-2 gap-2 tokenized">
-          <div>
-            <strong>Earn</strong>
-            <p>Earn token for every transaction and enjoy discounts, gift cards and more</p>
-          </div>
-
-          <div>
-            <strong>Redeem</strong>
-            <p>Redeem your token for exciting Benefits like discounts , giftcards and exclusive perks</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="feature-img">
-        <img src="/PNG/Coin 2.png" alt="">
-      </div>
-    </section>
-
-    <!-- Reliablity -->
-
-    <section class="d-flex p-5 feature">
-      <div class="feature-text">
-        <i>Reliable</i>
-        <h3>Secure Local Transfers: Ensuring Readability and Safety </h3>
-        <p>At MideWave we prioritize your security and safety, our secure local transfer reduce the risk associated with international transactions, providing you with a reliable and safe financial experience.</p>
-        <ul>
-          <li>Fast and Secure Local Transfer</li>
-          <li>Reduces Risk With International Transfer</li>
-          <li>Reliable and Safe Financial Experience </li>
-        </ul>
-      </div>
-
-      <div class="feature-img">
-        <img src="/PNG/EDC 1.png" alt="">
-      </div>
-    </section>
-
-
-    <!-- QR code -->
-    <section class="d-flex p-5 feature">
-      <div class="feature-text">
-        <i>Effortless</i>
-        <h3>Seamless QR Code Payments For Instant Transaction  </h3>
-        <p>Experience the convenience of Dynamic QR code payments for fast and secure transaction, simply scan the code and complete the payment instantly.</p>
-      </div>
-
-      <div class="feature-img">
-        <img src="PNG/QR.png" alt="">
-      </div>
-    </section>
-
-    
-
 
     <!-- Footer -->
-    <footer class="d-flex p-5 footer">
-      <h1>MideWave</h1>
-
-      <ul>
-        <b>Gift Card</b>
-        <li>Buy Now</li>
-        <li>Sell Now</li>
-        <li>Gift Card Balance</li>
-        <li>Gift Card Marketplace</li>
-        <li>Gift Card Deals</li>
-      </ul>
-
-      <ul>
-        <b>Popular Brand</b>
-        <li>Apple</li>
-        <li>Amazon</li>
-        <li>Walmart</li>
-        <li>Target</li>
-        <li>Starbucks</li>
-      </ul>
-
-      <ul>
-        <b>Google Play</b>
-        <li>Netflix</li>
-        <li>Uber</li>
-        <li>Disney+</li>
-        <li>Xbox live</li>
-        <li>PlayStation Store</li>
-      </ul>
-
-      <div>
-        <b>Subscribe</b>
-        <p>Stay Updated with Our Lastest Features and Releases</p>
-        <form class="d-flex" action="" method="get">
-          <input class="p-2" type="email" name="Enter Your Email" id="">
-          <input class="p-2 ml-3" type="submit" value="Subscribe">
-        </form>
-        <p class="subscribe-email">By subscribing you agree to our privacy policy and consent to receive update from our company.</p>
-      </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="footer-logo">MideWave</div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="footer-links">
+                        <h5>Gift Card</h5>
+                        <ul>
+                            <li><a href="#">Buy Now</a></li>
+                            <li><a href="#">Sell Now</a></li>
+                            <li><a href="#">Gift Card Balance</a></li>
+                            <li><a href="#">Gift Card Marketplace</a></li>
+                            <li><a href="#">Gift Card Deals</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="footer-links">
+                        <h5>Popular Brands</h5>
+                        <ul>
+                            <li><a href="#">Apple</a></li>
+                            <li><a href="#">Amazon</a></li>
+                            <li><a href="#">Walmart</a></li>
+                            <li><a href="#">Target</a></li>
+                            <li><a href="#">Starbucks</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="footer-links">
+                        <h5>Digital Cards</h5>
+                        <ul>
+                            <li><a href="#">Google Play</a></li>
+                            <li><a href="#">Netflix</a></li>
+                            <li><a href="#">Uber</a></li>
+                            <li><a href="#">Disney+</a></li>
+                            <li><a href="#">Xbox Live</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="newsletter text-center">
+                        <h5>Subscribe</h5>
+                        <p>Stay updated with our latest features and releases</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Enter your email" required>
+                            <input type="submit" value="Subscribe">
+                        </form>
+                        <p class="subscribe-email">By subscribing you agree to our privacy policy and consent to receive updates from our company.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <ul>
+                    <li>&copy; 2023 MideWave. All rights reserved.</li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookies Settings</a></li>
+                </ul>
+                
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <footer class="second-footer">
-      <ul>
-        <li>&copy; 2023 MideWave All rights reserved.</li>
-        <li><a href="http://">Privacy Policy</a></li>
-        <li><a href="http://">Terms of Services</a></li>
-        <li><a href="http://">Cookies Settings</a></li>
-      </ul>
-
-      <ul>
-        <i>@</i>
-        <i>@</i>
-        <i>@</i>
-        <i>@</i>
-      </ul>
-    </footer>
-    
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <script src="func.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple counter animation for stats
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    
+                    // Animate stats when the secure section comes into view
+                    if (entry.target.id === 'secure-value' || entry.target.id === 'experience-value') {
+                        animateValue('secure-value', 0, 10000, 2000);
+                        animateValue('experience-value', 0, 5000, 2000);
+                    }
+                }
+            });
+        }, {threshold: 0.1});
+        
+        // Observe elements that should animate
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
