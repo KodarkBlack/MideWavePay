@@ -4,11 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Important Meta Tags for Social Sharing -->
+    <meta property="og:image" content="/assets/midewave-logo-1200x630.png" />
+    <meta name="twitter:image" content="/assets/midewave-logo-1200x630.png" />
+    <meta name="instagram:image" content="/assets/midewave-logo-1200x630.png" />
+    <meta name="whatsapp:image" content="/assets/midewave-logo-1200x630.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MideWave" />
     <title>Cash App Payments | MideWave</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <link rel="icon" href="/assets/midewavelogo.png" type="image/png">
+    <link rel="icon" href="/assets/midewave-logo.png" type="image/png">
+    <!-- Favicon Links (multiple sizes for different devices) -->
+    <link rel="icon" href="/assets/midewave-logo.png" type="image/png" />
+    <link rel="icon" href="/assets/midewave-logo.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/midewave-logo-180x180.png" />
+
     <style>
         :root {
             --primary-color: #00C805;
@@ -37,28 +48,10 @@
             font-weight: 700;
             color: var(--primary-color) !important;
             font-size: 1.5rem;
-        }
-        
-        .nav-link {
-            color: white !important;
-            font-weight: 500;
-        }
-        
-        .nav-link:hover {
-            color: var(--primary-color) !important;
-        }
-        
-        .dropdown-menu {
-            background-color: var(--card-bg);
-        }
-        
-        .dropdown-item {
-            color: white;
-        }
-        
-        .dropdown-item:hover {
-            background-color: var(--primary-color);
-            color: var(--text-dark);
+            justify-content: center;
+            display: flex;
+            width: 100%;
+            height: 70px;
         }
         
         .dashboard {
@@ -139,99 +132,59 @@
             box-shadow: 0 5px 15px rgba(0, 200, 5, 0.3);
         }
         
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            overflow: auto;
+        /* Custom modal styles to match manage.html */
+        .alert-modal .modal-dialog {
+            max-width: 400px;
         }
         
-        .modal-content {
+        .alert-modal .modal-content {
             background-color: var(--card-bg);
-            margin: 10% auto;
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            animation: modalopen 0.4s;
-        }
-        
-        @keyframes modalopen {
-            from {opacity: 0; transform: translateY(-50px);}
-            to {opacity: 1; transform: translateY(0);}
-        }
-        
-        .close {
-            color: #aaa;
-            position: absolute;
-            top: 15px;
-            right: 25px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        .close:hover {
-            color: var(--primary-color);
-        }
-        
-        #payment-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        #payment-form label {
-            font-weight: 600;
-            color: var(--primary-color);
-            text-align: left;
-        }
-        
-        #payment-form input {
-            padding: 12px 15px;
-            border: 2px solid #333;
-            border-radius: 8px;
-            background-color: #333;
+            border-radius: 12px;
             color: white;
-            font-size: 16px;
-            transition: all 0.3s;
         }
         
-        #payment-form input:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            background-color: #444;
+        .alert-modal .modal-header {
+            border-bottom: none;
+            padding-bottom: 0;
+            justify-content: center;
         }
         
-        #Generate {
-            background-color: var(--primary-color);
-            color: var(--text-dark);
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 20px;
+        .alert-modal .modal-title {
+            font-size: 1.5rem;
+            text-align: center;
+            color: var(--primary-color);
         }
         
-        #Generate:hover {
-            background-color: #00b304;
+        .alert-modal .modal-body {
+            text-align: center;
+            padding: 20px 30px;
         }
         
-        #payment-info {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #333;
-            border-radius: 8px;
-            display: none;
+        .alert-modal .modal-footer {
+            border-top: none;
+            justify-content: center;
+            padding-top: 0;
+        }
+        
+        .alert-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .success-icon {
+            color: var(--primary-color);
+        }
+        
+        .error-icon {
+            color: var(--accent-color);
+        }
+        
+        .warning-icon {
+            color: #ffc107;
+        }
+        
+        .info-icon {
+            color: var(--primary-color);
         }
         
         .bottom-navigation {
@@ -269,19 +222,81 @@
             color: var(--text-dark);
         }
         
-        .rate-info {
-            background-color: var(--card-bg);
-            padding: 15px;
+        .balance {
+            background: linear-gradient(135deg, var(--primary-color), #6c5ce7);
+            color: white;
+            padding: 20px;
             border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .rate-info h4 {
+        .balance b {
+            font-size: 1.2rem;
+        }
+        
+        .balance span {
+            font-weight: 700;
+        }
+        
+        /* Loading spinner */
+        #loading-spinner {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Form styles to match manage.html */
+        .form-group label {
+            font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 10px;
+            text-align: left;
         }
         
+        .form-control {
+            padding: 12px 15px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background-color: #333;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            background-color: #444;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #00b304;
+        }
+
+        /* Transaction history styles */
         .transaction-history {
             background-color: var(--card-bg);
             border-radius: 10px;
@@ -326,7 +341,8 @@
         .status-declined {
             color: var(--accent-color);
         }
-        
+
+        /* Gender selection buttons */
         .gender-selection {
             display: flex;
             justify-content: center;
@@ -348,41 +364,22 @@
             border-color: var(--primary-color);
             background-color: rgba(0, 200, 5, 0.2);
         }
+
+        /* Rate info box */
+        .rate-info {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid var(--primary-color);
+        }
         
-        /* Loading spinner */
-        #loading-spinner {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
+        .rate-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
 
-        .balance {
-            background: linear-gradient(135deg, var(--primary-color), #6c5ce7);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .balance b {
-            font-size: 1.2rem;
-        }
-        
-        .balance span {
-            font-weight: 700;
-        }
-        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .balance {
@@ -392,11 +389,6 @@
             }
             .services {
                 grid-template-columns: 1fr 1fr;
-            }
-            
-            .modal-content {
-                margin: 20% auto;
-                width: 95%;
             }
             
             .gender-selection {
@@ -414,10 +406,7 @@
                 scrollbar-width: none;
                 padding: 15px 10px;
                 gap: 15px;
-                
             }
-
-           
             
             .cashapp-card {
                 padding: 20px;
@@ -433,33 +422,9 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="#">MideWave</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Payments <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Giftcards</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Payments Options
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Cash App</a>
-                        <a class="dropdown-item" href="#">Zelle</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Apple Pay</a>
-                        <a class="dropdown-item" href="#">Venmo Pay</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <a class="navbar-brand" href="#">
+            <img src="/assets/midewavepro.png" alt="MideWave Logo" style="width: 70px; display: block; margin: 0 auto;">
+        </a>
     </nav>
 
     <main class="dashboard">
@@ -485,13 +450,13 @@
         <div class="cashapp-card">
             <img>
             <dotlottie-player
-  src="https://lottie.host/c5888903-575d-4fb3-b410-acccfe5610e3/FTVxNbn8k4.lottie"
-  background="transparent"
-  speed="1"
-  style="width: 300px; height: 300px; justify-content: center; margin: 0 auto;"
-  loop
-  autoplay
-></dotlottie-player>
+                src="https://lottie.host/c5888903-575d-4fb3-b410-acccfe5610e3/FTVxNbn8k4.lottie"
+                background="transparent"
+                speed="1"
+                style="width: 300px; height: 300px; justify-content: center; margin: 0 auto;"
+                loop
+                autoplay
+            ></dotlottie-player>
             <h1>Cash App Payments</h1>
             
             <div class="rate-info">
@@ -530,22 +495,80 @@
             </table>
         </div>
     
-        <div id="payment-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Enter Payment Details</h2>
-                <form id="payment-form">
-                    <label for="amount">Amount ($):</label>
-                    <input type="number" id="amount" placeholder="Enter amount" required min="1">
-
-                    <label for="bank-details">Bank Details:</label>
-                    <input type="text" id="bank-details" placeholder="Account number or routing info" required>
-
-                    <button id="Generate" type="submit">Submit Transaction</button>
-                </form>
-                <div id="payment-info"></div>
+        <!-- Payment Modal (updated to match manage.html style) -->
+        <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="paymentModalLabel">Enter Payment Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="payment-form">
+                            <div class="form-group">
+                                <label for="amount">Amount ($)</label>
+                                <input type="number" class="form-control" id="amount" placeholder="Enter amount" required min="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="bank-details">Bank Details</label>
+                                <input type="text" class="form-control" id="bank-details" placeholder="Account number or routing info" required>
+                            </div>
+                            <button type="button" class="btn btn-primary" onclick="submitTransaction()">Submit Transaction</button>
+                        </form>
+                        <div id="payment-info" style="display: none; margin-top: 20px; padding: 15px; background-color: #333; border-radius: 8px;"></div>
+                    </div>
+                </div>
             </div>
-        </div>    
+        </div>
+
+        <!-- Alert Modal (matches manage.html) -->
+        <div class="modal fade alert-modal" id="alertModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="alertModalTitle">Alert</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert-icon" id="alertIcon">
+                            <i class='bx bx-info-circle'></i>
+                        </div>
+                        <p id="alertMessage">This is an alert message.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirmation Modal (matches manage.html) -->
+        <div class="modal fade alert-modal" id="confirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalTitle">Confirm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert-icon" id="confirmIcon">
+                            <i class='bx bx-question-mark'></i>
+                        </div>
+                        <p id="confirmMessage">Are you sure you want to proceed?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmActionBtn">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <section class="manage">
@@ -594,11 +617,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script
-  src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
-  type="module"
-></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
     
     <script type="module">
         // Import Firebase modules
@@ -630,51 +649,60 @@
         let userBalance = 0;
 
         // DOM elements
-        const modal = document.getElementById('payment-modal');
         const openModalBtn = document.getElementById('open-modal-btn');
-        const closeModalBtn = document.querySelector('.close');
-        const paymentForm = document.getElementById('payment-form');
-        const paymentInfoDiv = document.getElementById('payment-info');
         const loadingSpinner = document.getElementById('loading-spinner');
+
+        // Custom alert functions (matches manage.html)
+        function showAlert(title, message, type = 'info') {
+            const iconMap = {
+                'success': 'bx-check-circle success-icon',
+                'error': 'bx-x-circle error-icon',
+                'warning': 'bx-error warning-icon',
+                'info': 'bx-info-circle info-icon'
+            };
+            
+            document.getElementById('alertModalTitle').textContent = title;
+            document.getElementById('alertMessage').textContent = message;
+            
+            const iconElement = document.getElementById('alertIcon');
+            iconElement.innerHTML = `<i class='bx ${iconMap[type]}'></i>`;
+            
+            $('#alertModal').modal('show');
+        }
+
+        function showConfirm(title, message, callback, type = 'warning') {
+            const iconMap = {
+                'success': 'bx-check-circle success-icon',
+                'error': 'bx-x-circle error-icon',
+                'warning': 'bx-error warning-icon',
+                'info': 'bx-info-circle info-icon'
+            };
+            
+            document.getElementById('confirmModalTitle').textContent = title;
+            document.getElementById('confirmMessage').textContent = message;
+            
+            const iconElement = document.getElementById('confirmIcon');
+            iconElement.innerHTML = `<i class='bx ${iconMap[type]}'></i>`;
+            
+            const confirmBtn = document.getElementById('confirmActionBtn');
+            confirmBtn.onclick = callback;
+            
+            $('#confirmModal').modal('show');
+        }
 
         // On auth state changed
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // User is signed in
-                document.getElementById('username').textContent = user.displayName || 'User';
-                
-                // Load user data
-                const userRef = ref(database, 'users/' + user.uid);
-                onValue(userRef, (snapshot) => {
-                    const data = snapshot.val();
-                    if (data) {
-                        document.getElementById('balance').textContent = data.balance?.toFixed(2) || '0.00';
-                    }
-                });
-                
-                // Log page view
-                logEvent(analytics, 'page_view', {
-                    page_title: 'Dashboard',
-                    page_location: window.location.href
-                });
-            } else {
-                // User is signed out
-                Swal.fire({
-                    title: 'Session Expired',
-                    text: 'Please login again to continue',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                }).then(() => {
-                    window.location.href = '/login.html';
-                });
-            }
-            if (user) {
                 currentUser = user;
+                document.getElementById('username').textContent = user.displayName || 'User';
                 loadUserData();
                 loadTransactions();
                 loadCurrentRate();
             } else {
-                window.location.href = 'login.html';
+                showAlert('Session Expired', 'Please login again to continue', 'warning');
+                setTimeout(() => {
+                    window.location.href = '/login.html';
+                }, 2000);
             }
         });
 
@@ -685,7 +713,7 @@
                 const data = snapshot.val();
                 if (data) {
                     userBalance = data.balance || 0;
-                    // Update balance display if you have one
+                    document.getElementById('balance').textContent = data.balance?.toFixed(2) || '0.00';
                 }
             });
         }
@@ -743,46 +771,26 @@
             }
         };
 
-        // Modal functionality
+        // Open payment modal
         openModalBtn.addEventListener('click', function() {
-            modal.style.display = 'block';
-            paymentForm.style.display = 'block';
-            paymentInfoDiv.style.display = 'none';
-            paymentInfoDiv.innerHTML = '';
+            $('#paymentModal').modal('show');
         });
 
-        closeModalBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-        });
-
-        window.addEventListener('click', function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        // Form submission
-        paymentForm.addEventListener('submit', async function(event) {
-            event.preventDefault();
-            
+        // Submit transaction
+        window.submitTransaction = async function() {
             const amount = document.getElementById('amount').value;
             const bankDetails = document.getElementById('bank-details').value;
-            const generatingButton = document.getElementById('Generate');
+            const submitBtn = document.querySelector('#paymentModal .btn-primary');
 
             // Validate inputs
             if (!amount || amount <= 0 || !bankDetails) {
-                Swal.fire({
-                    title: 'Invalid Input',
-                    text: 'Please enter valid amount and bank details',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
+                showAlert('Invalid Input', 'Please enter valid amount and bank details', 'error');
                 return;
             }
 
             // Show loading state
-            generatingButton.disabled = true;
-            generatingButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submitting...';
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submitting...';
             loadingSpinner.style.display = 'flex';
 
             try {
@@ -813,70 +821,48 @@
                 });
 
                 // Show success message
-                Swal.fire({
-                    title: 'Submitted!',
-                    text: 'Your transaction has been submitted for admin approval',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
+                showAlert('Submitted!', 'Your transaction has been submitted for admin approval', 'success');
 
-                // Reset form
-                paymentForm.reset();
-                modal.style.display = 'none';
+                // Reset form and close modal
+                document.getElementById('payment-form').reset();
+                $('#paymentModal').modal('hide');
                 
             } catch (error) {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Failed to submit transaction. Please try again.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
+                showAlert('Error', 'Failed to submit transaction. Please try again.', 'error');
                 console.error('Error submitting transaction:', error);
             } finally {
-                generatingButton.disabled = false;
-                generatingButton.textContent = 'Submit Transaction';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Transaction';
                 loadingSpinner.style.display = 'none';
             }
-        });
+        };
 
-        // Service functions
-        function buySellGiftCard() {
-            Swal.fire({
-                title: 'Gift Cards',
-                text: 'Redirecting to gift cards section...',
-                icon: 'info',
-                confirmButtonText: 'OK'
-            }).then(() => {
+        // Service functions (updated to use custom modals)
+        window.buySellGiftCard = function() {
+            showConfirm('Gift Cards', 'You are being redirected to gift cards section', () => {
                 window.location.href = '/giftcard.html';
-            });
+            }, 'info');
         }
 
-        function tradeCrypto() {
-            Swal.fire({
-                title: 'Crypto Trading',
-                text: 'Redirecting to crypto exchange...',
-                icon: 'info',
-                confirmButtonText: 'OK'
-            });
+        window.tradeCrypto = function() {
+            showAlert('Crypto Trading', 'This feature is coming soon!', 'info');
         }
 
-        function claimTokenizedRewards() {
-            Swal.fire({
-                title: 'Tokenized Rewards',
-                text: 'Redirecting to rewards section...',
-                icon: 'info',
-                confirmButtonText: 'OK'
-            });
+        window.claimTokenizedRewards = function() {
+            showAlert('Tokenized Rewards', 'This feature is coming soon!', 'info');
         }
 
-        function buyDataAirtime() {
-            Swal.fire({
-                title: 'Data & Airtime',
-                text: 'Redirecting to data/airtime purchase...',
-                icon: 'info',
-                confirmButtonText: 'OK'
-            });
+        window.buyDataAirtime = function() {
+            showConfirm('Data & Airtime', 'You are being redirected to data/airtime purchase', () => {
+                window.location.href = '/data.html';
+            }, 'info');
         }
+
+        // Error handling
+        window.addEventListener('error', (event) => {
+            showAlert('Error', 'An unexpected error occurred. Please try again later.', 'error');
+            console.error(event);
+        });
     </script>
 </body>
 </html>

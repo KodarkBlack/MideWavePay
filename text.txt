@@ -1,0 +1,13 @@
+Public API Key:   dR.xUmzQcbfsUdW7bYuzloH5YKYCzUmCAbJTf2rL0azWoRP5ZIipy8uC2NugHv4-
+
+Secret API Key:   i4tr7INhNkUINqyzHKjcho386vGIqGpeI/mB/COsD1ddSAu1F5tDu7S0KPHagUeNAhdpRz5PXhDDRiouX/VqmpI8fuv6L63vhHLFQTpQ58fWBlkOu2W4QCcb6nZv2FSV
+
+
+
+
+Test Secret Key
+sk_test_c10221429e6e86d11ea7c03bf2eb15c2e33ea7fe
+Test Public Key
+pk_test_48a80d3ce0116cd1ac78410703c172eb0880499a
+Test Callback URL
+https://tomsplaces.com/customer/payment_callback/paystack_confirm
